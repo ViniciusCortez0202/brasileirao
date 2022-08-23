@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Home() {
-  const image = require('../../assets/logo-brasileirao.png');
+  const image = require('../../../assets/logo-brasileirao.png');
 
  return (
    <View style={style.container}>
