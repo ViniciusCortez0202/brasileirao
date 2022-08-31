@@ -4,7 +4,16 @@ class RoundsController {
     getRounds = async () => {
         const roundsService = new RoundsService()
         const list = await roundsService.getRoundsList();
-        return list;
+
+        return list.map((round) => {
+            const begin = `${round.inicio.substring(8, 10)}/${round.inicio.substring(5, 7)}`;
+            const end = `${round.fim.substring(8, 10)}/${round.fim.substring(5, 7)}`;
+            return {
+                id: round.rodada_id,
+                begin: begin,
+                end: end,
+            }
+        })
     }
 
     getMatches = async (id) => {

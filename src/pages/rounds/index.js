@@ -42,16 +42,20 @@ export default function Rounds() {
       getMatches(selectedRound);
   }, [selectedRound])
 
+  const separator = () => {
+    return <View style={{borderBottomColor: 'rgba(0,73,169,255)', borderBottomWidth: 1}}></View>
+  }
+
   const list = () => {
     if (dataMatches.length)
-      return <FlatList data={dataMatches} renderItem={({ item }) => <MatchItem match={item} />} />;
+      return <FlatList data={dataMatches} ItemSeparatorComponent={separator}  renderItem={({ item }) => <MatchItem match={item} />} />;
   }
 
   if (isLoading)
     return (<View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator size="large" color="rgba(228,189,0,255)" /></View>);
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Picker
         selectedValue={selectedRound}
         onValueChange={(itemValue, itemIndex) => setSelectedRound(itemValue)
@@ -61,7 +65,7 @@ export default function Rounds() {
         <Picker.Item key={'-1'} label='Escola uma rodada' value={null} />
         {
           data.map((round) => {
-            return <Picker.Item key={round.rodada_id} label={`${round.rodada_id}: ${round.inicio} à ${round.fim}`} value={round.rodada_id} />
+            return <Picker.Item key={round.id} label={`${round.id}: ${round.begin} à ${round.end}`} value={round.id} />
           })
         }
       </Picker>
