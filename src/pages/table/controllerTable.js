@@ -12,10 +12,12 @@ class ControllerTable {
             this.#table.set(team.id, {
                 id: team.id,
                 name: team.nome,
-                shild: team.escudos,
+                shield: team.escudos,
                 points: 0,
                 goals: 0,
                 goalsConceded: 0,
+                goalsDifference: 0,
+                position: 0
             })
         }
     }
@@ -33,10 +35,12 @@ class ControllerTable {
                 houseTeam.goals += match.placar_oficial_mandante;
                 houseTeam.goalsConceded += match.placar_oficial_visitante;
                 houseTeam.points += points(match.placar_oficial_mandante, match.placar_oficial_visitante)
-
+                houseTeam.goalsDifference = houseTeam.goals - houseTeam.goalsConceded;
+                
                 visitorTeam.goalsConceded += match.placar_oficial_mandante;
                 visitorTeam.goals += match.placar_oficial_visitante;
                 visitorTeam.points += points(match.placar_oficial_visitante, match.placar_oficial_mandante)
+                visitorTeam.goalsDifference = visitorTeam.goals - visitorTeam.goalsConceded;
 
             }
         }
@@ -46,7 +50,12 @@ class ControllerTable {
         this.#table = new Map();
         await this.#formatTable();
         await this.#getAllMatches();
-        return this.#table;
+        let teams = Array.from(this.#table.values());
+        teams = teams.sort((a, b) => a.points < b.points);
+        return teams.map((team, index) => {
+            team.position = index + 1;            
+            return team;
+        });                  
     }
 
 }
