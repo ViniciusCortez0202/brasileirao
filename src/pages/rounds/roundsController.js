@@ -1,19 +1,29 @@
 import RoundsService from "../../services/roundsService"
 
+
 class RoundsController {
     getRounds = async () => {
         const roundsService = new RoundsService()
         const list = await roundsService.getRoundsList();
-
+        const currentWeek = this.getWeek(new Date()) - 1;
         return list.map((round) => {
+
+            const week = this.getWeek(new Date(round.inicio.substring(0, round.inicio.indexOf(' ')))) - 1;
             const begin = `${round.inicio.substring(8, 10)}/${round.inicio.substring(5, 7)}`;
             const end = `${round.fim.substring(8, 10)}/${round.fim.substring(5, 7)}`;
             return {
                 id: round.rodada_id,
                 begin: begin,
                 end: end,
+                isCurrentRound: currentWeek === week
             }
         })
+    }
+
+    getWeek = (date) => {        
+        const oneJan = new Date(date.getFullYear(), 0, 1);
+        const numberOfDays = Math.floor((date - oneJan) / (24 * 60 * 60 * 1000));        
+        return  Math.ceil((date.getDay() + 1 + numberOfDays) / 7);;
     }
 
     getMatches = async (id) => {

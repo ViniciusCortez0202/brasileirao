@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   textHeaderDrawer: {
     textAlign: 'center',
-    color: "#ebebeb",
+    color: "rgb(235, 235, 235)",
     fontSize: 23,
     fontWeight: 'bold',
     margin: 10,

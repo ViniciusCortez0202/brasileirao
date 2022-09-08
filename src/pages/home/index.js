@@ -2,14 +2,18 @@ import React from 'react';
 import { View, Text, StyleSheet, Button, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function Home() {
+export default function Home({ navigation }) {
   const image = require('../../../assets/logo-brasileirao.png');
+
+  const onPressRound = () => {
+    navigation.navigate('Rounds', {current: true})
+  }
 
  return (
    <View style={style.container}>
     <LinearGradient style={style.linearGradient} start={[0.4 , 1.5]} end={[0, 0]} colors={['#008000', 'transparent']}/>
     <Image source={image} resizeMode='center' style={{width: 400, height: 400}}/>
-    <TouchableOpacity activeOpacity={0.8} style={style.button}>
+    <TouchableOpacity activeOpacity={0.8} onPress={onPressRound} style={style.button}>
       <Text style={style.textButton}>Rodada atual</Text>
     </TouchableOpacity>
 
@@ -34,13 +38,13 @@ const style = StyleSheet.create({
   button:{
     width: '50%',
     height: 65,
-    backgroundColor: '#ffff00',
+    backgroundColor: 'rgb(255, 255, 0)',
     alignItems:'center',
     justifyContent: 'center',
     borderRadius: 15
   },
   textButton:{
-    color: '#808080',
+    color: 'rgb(128, 128, 128)',
     fontSize: 20
   }
 });
