@@ -1,11 +1,12 @@
 import { Picker } from '@react-native-picker/picker';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 import MatchItem from './matchItem';
 import RoundsController from './roundsController';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function Rounds({ route }) {
-  const current = route.params?.current;
+  var current = route.params?.current;
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [dataMatches, setMatches] = useState([]);
@@ -37,9 +38,11 @@ export default function Rounds({ route }) {
     }
   }
 
-  useEffect(() => {
-    getRounds();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getRounds();
+    }, [route])
+  );
 
   useEffect(() => {
     if (selectedRound !== null)

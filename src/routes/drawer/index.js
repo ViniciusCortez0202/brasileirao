@@ -51,7 +51,7 @@ export default function DrawerRoute() {
           return <Ionicons name='podium' size={size} color={focused ? 'rgb(240, 240, 187)' : 'rgb(173, 173, 140)'}></Ionicons>
         }
       }} />
-      <Drawer.Screen name="Rounds" component={Rounds} options={{
+      <Drawer.Screen name="Rounds" initialParams={{current: false}} component={Rounds} options={{
         headerStyle: headerStyle,
         drawerLabel: "Rodadas", headerTitle: () => titleFormat('Rodadas'),
         drawerIcon: ({ focused, size }) => {
