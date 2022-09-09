@@ -6,7 +6,7 @@ import ItemTeam from './itemTeam';
 
 export default function Teams() {
 
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
   const getTeams = async () => {
@@ -18,7 +18,7 @@ export default function Teams() {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }
   useEffect(() => { getTeams() }, [])
@@ -26,8 +26,8 @@ export default function Teams() {
     return (<View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator size="large" color="rgba(228,189,0,255)" /></View>);
   }
   return (
-    <View>
-      <FlatList data={data} renderItem={({ item, index, separators }) => <ItemTeam team={item} />} />
+    <View style={{flex: 1}}>
+      <FlatList style={{flex: 1}} data={data} renderItem={({ item, index, separators }) => <ItemTeam team={item} />} />
     </View>
   );
 
