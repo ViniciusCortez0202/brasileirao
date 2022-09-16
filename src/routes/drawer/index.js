@@ -62,9 +62,3 @@ export default function DrawerRoute() {
   );
 
 }
-
-const styles = StyleSheet.create({
-  drawer: {
-    backgroundColor: '#808080'
-  }
-})
